@@ -48,14 +48,14 @@ public class PilotDAOJDBCOracleImpl implements DAO<F1pojo> {
                 }
 
             } catch (SQLException throwables) {
-                throw new DAOException(1);
+                throw new DAOException(8);
             } finally {
                 try {
                     if (rs != null) rs.close();
                     if (st != null) st.close();
                     if (con != null) con.close();
                 } catch (SQLException e) {
-                    throw new DAOException(1);
+                    throw new DAOException(8);
                 }
 
             }
@@ -154,7 +154,7 @@ public class PilotDAOJDBCOracleImpl implements DAO<F1pojo> {
                     if (st != null) st.close();
                     if (con != null) con.close();
                 } catch (SQLException e) {
-                    throw new DAOException(1);
+                    throw new DAOException(8);
                 }
             }
         }
@@ -221,7 +221,7 @@ public class PilotDAOJDBCOracleImpl implements DAO<F1pojo> {
                     if (st != null) st.close();
                     if (con != null) con.close();
                 } catch (SQLException e) {
-                    throw new DAOException(1);
+                    throw new DAOException(8);
                 }
             }
         }
@@ -233,7 +233,7 @@ public class PilotDAOJDBCOracleImpl implements DAO<F1pojo> {
             if (st != null) st.close();
             if (con != null) con.close();
         } catch (SQLException throwables) {
-            throw new DAOException(1);
+            throw new DAOException(8);
         }
     }
 }
