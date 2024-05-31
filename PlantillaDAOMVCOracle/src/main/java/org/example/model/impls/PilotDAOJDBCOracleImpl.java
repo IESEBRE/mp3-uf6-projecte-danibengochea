@@ -25,7 +25,7 @@ public class PilotDAOJDBCOracleImpl implements DAO<F1pojo> {
     public void createTable() throws DAOException {
         Connection con = null;
         Statement st = null;
-        ResourceBundle rd = ResourceBundle.getBundle("property");
+        ResourceBundle rd = ResourceBundle.getBundle("database");
         {
             String url = rd.getString("url");
             String user = rd.getString("userName");
@@ -50,7 +50,7 @@ public class PilotDAOJDBCOracleImpl implements DAO<F1pojo> {
     public List<F1pojo> getAll() throws DAOException {
         //Declaració de variables del mètode
         List<F1pojo> pilot = new ArrayList<>();
-        ResourceBundle rd = ResourceBundle.getBundle("property");
+        ResourceBundle rd = ResourceBundle.getBundle("database");
         {
             String url = rd.getString("url");
             String user = rd.getString("userName");
@@ -90,7 +90,7 @@ public class PilotDAOJDBCOracleImpl implements DAO<F1pojo> {
         PreparedStatement st = null;
         String callSql = "{call InsertarPilot(?, ?, ?, ?, ?, ?)}";
         DefaultTableModel model = this.model.getModel();
-        ResourceBundle rd = ResourceBundle.getBundle("property");
+        ResourceBundle rd = ResourceBundle.getBundle("database");
         {
             String url = rd.getString("url");
             String user = rd.getString("userName");
@@ -123,7 +123,7 @@ public class PilotDAOJDBCOracleImpl implements DAO<F1pojo> {
         //Declaració de variables del mètode
         Connection con = null;
         PreparedStatement st = null;
-        ResourceBundle rd = ResourceBundle.getBundle("property");
+        ResourceBundle rd = ResourceBundle.getBundle("database");
         {
             String url = rd.getString("url");
             String user = rd.getString("userName");
@@ -158,7 +158,7 @@ public class PilotDAOJDBCOracleImpl implements DAO<F1pojo> {
         Connection con = null;
         CallableStatement st = null;
         String callSql = "{? = call BorrarPilot(?)}";
-        ResourceBundle rd = ResourceBundle.getBundle("property");
+        ResourceBundle rd = ResourceBundle.getBundle("database");
         {
             String url = rd.getString("url");
             String user = rd.getString("userName");
