@@ -126,8 +126,8 @@ public class Controller implements PropertyChangeListener { //1. Implementació 
                                 }
 
                                 for (int i = 0; i < model.getRowCount(); i++) {
-                                    if (pilot.getText().equals(model.getValueAt(i, 0)) && (altura.getText().replaceAll(",", ".").equals(model.getValueAt(i, 1).toString()) || altura.getText().replaceAll("\\.", ",").equals(model.getValueAt(i, 1).toString())) &&
-                                            numVictories.getText().equals(model.getValueAt(i, 3))) {
+                                    if (pilot.getText().equals(model.getValueAt(i, 1)) && (altura.getText().replaceAll(",", ".").equals(model.getValueAt(i, 2).toString()) || altura.getText().replaceAll("\\.", ",").equals(model.getValueAt(i, 2).toString())) &&
+                                            numVictories.getText().equals(model.getValueAt(i, 4))) {
                                         duplicat = true;
                                         break;
                                     }
@@ -220,8 +220,8 @@ public class Controller implements PropertyChangeListener { //1. Implementació 
                         // Verifiquem si les dades modificades ja existeixen a la taula si una sola dada no existeix no dixara modificar
                         boolean duplicat = false;
                         for (int i = 0; i < model.getRowCount(); i++) {
-                            if (pilot.getText().equals(model.getValueAt(i, 0)) && (altura.getText().replaceAll(",", ".").equals(model.getValueAt(i, 1).toString()) || altura.getText().replaceAll("\\.", ",").equals(model.getValueAt(i, 1).toString())) &&
-                                    numVictories.getText().equals(model.getValueAt(i, 3))) {
+                            if (pilot.getText().equals(model.getValueAt(i, 1)) && (altura.getText().replaceAll(",", ".").equals(model.getValueAt(i, 1).toString()) || altura.getText().replaceAll("\\.", ",").equals(model.getValueAt(i, 2).toString())) ||
+                                    numVictories.getText().equals(model.getValueAt(i, 4)) || comboBox1.getSelectedItem().equals(model.getValueAt(i, 5))) {
                                 duplicat = true;
                                 break;
                             }
@@ -322,10 +322,6 @@ public class Controller implements PropertyChangeListener { //1. Implementació 
     //2. Propietat lligada per controlar quan genero una excepció
     public static final String PROP_EXCEPCIO = "excepcio";
     private DAOException excepcio;
-
-    public DAOException getExcepcio() {
-        return excepcio;
-    }
 
     public void setExcepcio(DAOException excepcio) {
         DAOException valorVell = this.excepcio;

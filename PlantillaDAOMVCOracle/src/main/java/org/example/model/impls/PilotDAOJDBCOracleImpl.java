@@ -6,7 +6,11 @@ import org.example.model.exceptions.DAOException;
 import org.example.view.F1;
 import org.example.view.Model;
 
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -16,53 +20,6 @@ import java.util.*;
 
 public class PilotDAOJDBCOracleImpl implements DAO<F1pojo> {
     Model model = new Model();
-
-    @Override
-    public F1pojo get(Long id) throws DAOException {
-        //Declaració de variables del mètode
-        Connection con = null;
-        Statement st = null;
-        ResultSet rs = null;
-        F1pojo pilot = null;
-        ResourceBundle rd = ResourceBundle.getBundle("property");
-        {
-            String url = rd.getString("url");
-            String user = rd.getString("userName");
-            String password = rd.getString("password");
-            //Accés a la BD usant l'API JDBC
-            try {
-                con = DriverManager.getConnection(url, user, password);
-                //Comprovem si hi ha una taula creada amb el nom de pilot
-                DatabaseMetaData dbmd = con.getMetaData();
-                rs = dbmd.getTables(null, "C##HR", "PILOT", null);
-                if (!rs.next()) {
-                    st = con.createStatement();
-                    st.execute("BEGIN" + "CreatePilotTaula;" + "END;");
-                }
-                String query = "SELECT * FROM PILOT";
-                PreparedStatement pst = con.prepareStatement(query);
-                pst.setLong(1, id);
-                rs = pst.executeQuery();
-                if (rs.next()) {
-                    pilot = new F1pojo(rs.getString("Nom"), rs.getDouble("altura"), rs.getBoolean("campeoMundial"), rs.getInt("numVictories"), rs.getInt("Numero"));
-                }
-
-            } catch (SQLException throwables) {
-                throw new DAOException(8);
-            } finally {
-                try {
-                    if (rs != null) rs.close();
-                    if (st != null) st.close();
-                    if (con != null) con.close();
-                } catch (SQLException e) {
-                    throw new DAOException(8);
-                }
-
-            }
-        }
-        return pilot;
-    }
-
 
     //fem un metode per crear la taula
     public void createTable() throws DAOException {
@@ -81,9 +38,8 @@ public class PilotDAOJDBCOracleImpl implements DAO<F1pojo> {
                 throw new DAOException(8);
             } finally {
                 try {
-                    if (st != null) st.close();
-                    if (con != null) con.close();
-                } catch (SQLException e) {
+                    closeResources(null, st, con);
+                }catch (DAOException e) {
                     throw new DAOException(8);
                 }
             }

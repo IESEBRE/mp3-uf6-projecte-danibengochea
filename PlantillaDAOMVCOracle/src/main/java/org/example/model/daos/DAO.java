@@ -9,14 +9,27 @@ import java.util.ResourceBundle;
 
 public interface DAO <T>{
 
-    T get(Long id) throws DAOException;
 
     List<T> getAll() throws DAOException;
     void save(T obj) throws DAOException;
     //Posem el metode de insertar
+
+    /**
+     * Metode per insertar un objecte a la taula
+     * @param obj
+     * @throws DAOException
+     * @throws SQLException
+     */
     void insertar(T obj) throws DAOException, SQLException;
 //Posem el metode de borrar
-default int obtenirNumeroMaxim() throws SQLException, DAOException {
+
+    /**
+     * Metode per obtenir el numero maxim de la taula
+     * @return
+     * @throws SQLException
+     * @throws DAOException
+     */
+    default int obtenirNumeroMaxim() throws SQLException, DAOException {
     int maxNumero = 0;
     ResourceBundle rd = ResourceBundle.getBundle("property");
     String url = rd.getString("url");
